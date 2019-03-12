@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<h3>Szukaj po imieniu bądź wieku</h3>
+
+<form action="/people/search" method="post">
+    <input type="text" name="option">
+    <input type="submit" value="szukaj">
+</form>
+
+<div class="container">
+    <h2>People</h2>
+    <p th:if="${message}" th:text="${message}"  style="color : greenyellow"> </p>
+    <p>The .table-bordered class adds borders to a table:</p>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>age</th>
+            <th>Delete</th>
+            <th>Update</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="person : ${people}">
+            <td th:text="${person.id}"> </td>
+            <td th:text="${person.name}"> </td>
+            <td th:text="${person.age}"> </td>
+            <td>
+                <a th:href="@{|/people/${person.id}/delete|}">
+                    Delete</a>
+
+            </td>
+            <td>
+                <a th:href="@{|/people/${person.id}/update|}">
+                    Update</a>
+            </td>
+        </tr>
+
+
+
+        </tbody>
+    </table>
+</div>
+
+</body>
